@@ -15,12 +15,19 @@ void setup(){
 }
 void draw (){
   background(135, 171, 92);    // in draw method 
+  
 fill(164, 201, 107);      // in draw method 
+
+
+if (x = 0){
+  text("Congrats! You Won!", 450,500 ); 
+  textSize(27); 
+}
   ellipse(x, y, 15, 15);
   cadillac.display();
 cadillac.move();  
 truck.move();
-    
+
   truck.display();
   truck2.move();
     
@@ -40,36 +47,48 @@ truck.move();
     truck7.move();
     
   truck7.display();
+    if( intersects(truck) || intersects(truck2) ||intersects(truck3) || intersects(truck4) || intersects(truck5) || intersects(truck6) || intersects(truck7)){
+    y = 600;
+    }
+    
+    
+
 }
 void keyPressed(){
   if(key == CODED){
       if(keyCode == UP)
       {
-        y -= 20;
+        y -= 10;
       //Frog Y position goes up
       }
       else if(keyCode == DOWN)
       {
-        y += 20;
+        y += 10;
         //Frog Y position goes down 
       }
       else if(keyCode == RIGHT)
       {
-        x += 20;
+        x += 10;
        //Frog X position goes right
       }
       else if(keyCode == LEFT)
       {
-        x -= 20;
+        x -= 10;
         //Frog X position goes left
         
       }
       
    }
 }
+boolean intersects(Car car) {
+if ((y > car.getY() && y < car.getY()+50) && (x > car.getX() && x < car.getX()+car.getSize()))
+          return true;
+    else 
+        return false;
+}
+
 class Car{
-
-
+  
  int x;
  int y;
  int size;
@@ -78,14 +97,25 @@ class Car{
    this.x = x;
    this.y = y;
    this.size = size;
-   this.speed = speed;
- }
-   void display() 
+   this.speed = speed; 
+
+}
+ int getX(){
+   return x; 
+  }
+int getY(){
+   return y; 
+  }
+  int getSize(){
+   return size; 
+  }
+    void display() 
   {
     fill(0,255,0);
     rect(x , y, size , 50);
+    
   }
-  void move(){
+   void move(){
     x -= speed;
     if(x <= -size ){
       x = 1000;
@@ -95,3 +125,4 @@ else if(x >= 1000 ){
 }
 }
 }
+
