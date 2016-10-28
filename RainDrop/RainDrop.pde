@@ -16,42 +16,56 @@
  int width4 = 300;
   int height4 = -50;
   int score;
+  PImage backgroundImage;
+import ddf.minim.*;       //at the very top of your sketch
+  Minim minim;        //as a member variable
+  AudioSample sound;      //as a member variable
+ 
+
 void setup(){
   int height = 980;
 int width = 1000;
   
-  
-  
+  minim = new Minim (this);    //in the setup method
+    sound = minim.loadSample("BD.wav", 128);//in the setup method
   size(width, height);       //in setup method
 
 
 
   
-  
-  
 }
+  
+
 void draw(){
 
  
   background(red, green, blue);  //in draw method
-ellipse( x,  y,  width2,  height2);  //in draw method
-  fill( red2, green2, blue2);      //in draw method
-  stroke(red3, green3, blue3);   //in draw 
-
-y ++ ;y ++ ;y ++ ;y ++ ;y ++ ;y ++ ;y ++ ;y ++ ;y ++ ;y ++ ;y ++ ;y ++ ;y ++ ;y ++ ;y ++ ;y ++ ;y ++ ;y ++ ;y ++ ;y ++ ;y ++ ;y ++ ;y ++ ;y ++ ;y ++ ;y ++ ;y ++ ;y ++ ;
-
-if(y >= 1000){
+  textSize(20);
+text("Score: " + score, 20, 20);
+if(score == 50 ){
+  textSize(32);
+  fill(22,99,233);
+  text("You won!!!", 400,300);
+}
+else{
+  y += 30;
+  if(y >= 1000){
 checkCatch(x);
+ sound.trigger();        //in draw method (when the rain drop hits)
   y = 10;
  x = (int) random(width);   
 }
+ellipse( x,  y,  width2,  height2);  //in draw method
+  fill( red2, green2, blue2);      //in draw method
+  stroke(red3, green3, blue3);   //in draw 
+}
+
  
 
 
   rect(mouseX, y2, width4, height4);
 fill(0, 0, 0);
-textSize(20);
-text("Score: " + score, 20, 20);
+
 }
 void checkCatch(int x){
 if (x > mouseX && x < mouseX+300)
